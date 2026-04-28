@@ -500,6 +500,56 @@ const Footer = () => {
   );
 };
 
+const FAQ = () => {
+  const faqs = [
+    {
+      q: "O site será meu para sempre?",
+      a: "Sim. Ao finalizar o projeto, todo o código e propriedade do site são seus. Não cobro mensalidades pelo uso do site."
+    },
+    {
+      q: "Meu site vai aparecer no Google?",
+      a: "Com certeza. Utilizo técnicas de SEO (Otimização para Buscas) para que sua empresa seja encontrada mais facilmente por novos clientes."
+    },
+    {
+      q: "O site funciona bem no celular?",
+      a: "Sim, 100%. Hoje, a maioria dos acessos vem pelo celular, então seu site será planejado para ser rápido e bonito em qualquer tela."
+    },
+    {
+      q: "Quanto tempo demora para ficar pronto?",
+      a: "Depende da complexidade, mas um site profissional padrão costuma ser entregue em um prazo médio de 7 a 15 dias após o envio do conteúdo."
+    }
+  ];
+
+  return (
+    <section className="px-6 py-24 md:py-32 bg-bg-dark relative">
+      <div className="max-w-[1100px] mx-auto">
+        <motion.div {...fadeIn}>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">05 // perguntas_frequentes</span>
+          <h2 className="font-display text-4xl md:text-6xl font-black mb-16 tracking-tighter">Tirando suas dúvidas</h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {faqs.map((faq, i) => (
+            <motion.div 
+              key={i}
+              {...fadeIn}
+              transition={{ delay: i * 0.1 }}
+              className="glass p-8 md:p-10 tech-border hover:bg-white/[0.02] transition-colors"
+            >
+              <h4 className="text-lg font-display font-black text-white mb-4 leading-tight tracking-tight uppercase">
+                <span className="text-brand-teal mr-2">/</span>{faq.q}
+              </h4>
+              <p className="text-text-dim text-sm leading-relaxed font-medium">
+                {faq.a}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function App() {
   return (
     <div className="relative">
@@ -513,6 +563,8 @@ export default function App() {
       <Skills />
       <SectionDivider />
       <Process />
+      <SectionDivider />
+      <FAQ />
       <SectionDivider />
       <CTA />
       <Footer />
