@@ -105,7 +105,11 @@
 .counter-item::before {
   counter-increment: step;
   content: "0" counter(step);
-  @apply font-display font-bold text-brand-teal text-xl mr-4;
+  @apply font-display font-black text-brand-teal block;
+  font-size: 3rem;
+  line-height: 1;
+  opacity: 0.4;
+  margin-bottom: 0.75rem;
 }
 
 .radial-glow-teal {
@@ -114,5 +118,110 @@
 
 .radial-glow-orange {
   background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+}
+
+/* ─── GLOBAL ─────────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0c0e;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 170, 0.25);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 170, 0.55);
+}
+
+/* ─── CURSOR GLOW ────────────────────────────────────────────────────────── */
+
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 170, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: left 0.12s ease-out, top 0.12s ease-out;
+}
+
+@media (hover: none) {
+  .cursor-glow {
+    display: none;
+  }
+}
+
+/* ─── MARQUEE ────────────────────────────────────────────────────────────── */
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+/* ─── NOISE TEXTURE ─────────────────────────────────────────────────────── */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: overlay;
+}
+
+/* ─── LOGO GLITCH ────────────────────────────────────────────────────────── */
+
+@keyframes logo-glitch {
+  0%, 100% { transform: none; filter: none; }
+  15%       { transform: skewX(-6deg) translateX(-2px); filter: hue-rotate(90deg); }
+  30%       { transform: skewX(4deg) translateX(2px); filter: none; }
+  50%       { transform: translateX(-1px); filter: hue-rotate(-60deg) brightness(1.2); }
+  70%       { transform: skewX(-2deg); filter: none; }
+  85%       { transform: translateX(1px) skewX(2deg); }
+}
+
+.logo-glitch:hover {
+  animation: logo-glitch 0.3s linear 1;
+}
+
+/* ─── TECH BORDER — corner accents on direct hover ───────────────────────── */
+
+.tech-border:hover::before {
+  opacity: 1;
+}
+
+.tech-border::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--color-brand-teal);
+  border-right: 2px solid var(--color-brand-teal);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tech-border:hover::after,
+.tech-card:hover .tech-border::after {
+  opacity: 1;
 }
 
