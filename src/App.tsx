@@ -225,7 +225,7 @@ const FloatingCode = () => {
 // ─── SECTION DIVIDER ─────────────────────────────────────────────────────────
 
 const SectionDivider = () => (
-  <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-teal/15 to-transparent my-12 md:my-20" />
+  <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-teal/15 to-transparent my-8 md:my-20" />
 );
 
 // ─── NAVBAR ──────────────────────────────────────────────────────────────────
@@ -273,7 +273,7 @@ const Navbar = () => {
     >
       <div
         className={`w-full max-w-[1100px] rounded-[2px] px-6 md:px-8 py-3 md:py-4 flex items-center justify-between tech-border transition-all duration-500 ${
-          scrolled ? 'glass' : 'bg-transparent border-transparent'
+          scrolled ? 'glass' : 'glass md:bg-transparent md:border-transparent md:backdrop-blur-none'
         }`}
       >
         <a href="#" className="logo-glitch font-display font-black text-xl md:text-2xl tracking-tighter relative">
@@ -362,7 +362,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-3 border border-white/5 bg-white/[0.02] px-4 py-2 rounded-[2px] mb-12"
+          className="inline-flex items-center gap-3 border border-white/5 bg-white/[0.02] px-4 py-2 rounded-[2px] mb-7 md:mb-12"
         >
           <div className="animate-pulse-teal" />
           <span className="text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-brand-teal">
@@ -376,7 +376,7 @@ const Hero = () => {
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
             className="font-display font-black leading-[0.85] tracking-[-0.06em]"
-            style={{ fontSize: 'clamp(3rem, 12vw, 100px)' }}
+            style={{ fontSize: 'clamp(2.2rem, 9.5vw, 100px)' }}
           >
             Seu negócio
           </motion.div>
@@ -387,7 +387,7 @@ const Hero = () => {
             animate={{ y: 0 }}
             transition={{ delay: 0.08, duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
             className="font-display font-black leading-[0.85] tracking-[-0.06em]"
-            style={{ fontSize: 'clamp(3rem, 12vw, 100px)' }}
+            style={{ fontSize: 'clamp(2.2rem, 9.5vw, 100px)' }}
           >
             <span className="text-brand-teal text-glow-teal">merece</span> um
           </motion.div>
@@ -398,13 +398,13 @@ const Hero = () => {
             animate={{ y: 0 }}
             transition={{ delay: 0.16, duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
             className="font-display font-black leading-[0.85] tracking-[-0.06em]"
-            style={{ fontSize: 'clamp(3rem, 12vw, 100px)' }}
+            style={{ fontSize: 'clamp(2.2rem, 9.5vw, 100px)' }}
           >
             <span className="text-brand-orange text-glow-orange">site profissional</span>
           </motion.div>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-end">
+        <div className="grid lg:grid-cols-[1fr_auto] gap-6 md:gap-12 items-end">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -435,23 +435,23 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 mt-12 md:mt-20 pt-8 md:pt-12 border-t border-white/5">
+        <div className="grid grid-cols-3 gap-4 md:gap-16 mt-10 md:mt-20 pt-8 md:pt-12 border-t border-white/5">
           {[
             { label: 'Projetos no Ar', value: '1+' },
             { label: 'Clientes Satisfeitos', value: '100%' },
-            { label: 'Experiência em TI', value: '3+' },
+            { label: 'Anos em TI', value: '3+' },
           ].map((stat, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.1, duration: 0.6 }}
-              className={`flex flex-col group ${i === 2 ? 'col-span-2 md:col-span-1' : ''}`}
+              className="flex flex-col group"
             >
-              <span className="text-brand-teal font-display text-4xl md:text-5xl font-black mb-2 tracking-tighter group-hover:translate-x-2 transition-transform duration-300 text-glow-teal">
+              <span className="text-brand-teal font-display text-3xl md:text-5xl font-black mb-1 md:mb-2 tracking-tighter group-hover:translate-x-1 transition-transform duration-300 text-glow-teal">
                 {stat.value}
               </span>
-              <span className="text-[8px] md:text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-text-dim">
+              <span className="text-[7px] md:text-[9px] font-mono font-bold uppercase tracking-[0.15em] md:tracking-[0.3em] text-text-dim leading-tight">
                 {stat.label}
               </span>
             </motion.div>
@@ -481,15 +481,15 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section id="sobre" className="px-6 py-16 md:py-32 bg-grid">
+    <section id="sobre" className="px-6 py-12 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // foco_em_resultados</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-10 md:mb-20 tracking-tighter">Um site para ser <br />levado a sério</h2>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // sobre_mim</span>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-6 md:mb-20 tracking-tighter">Um site para ser levado a sério</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-[1fr_400px] gap-10 md:gap-24 items-start">
-          <motion.div {...fadeIn} transition={{ delay: 0.1 }} className="space-y-8 md:space-y-10 text-text-dim leading-[1.8] text-base md:text-lg">
+          <motion.div {...fadeIn} transition={{ delay: 0.1 }} className="order-2 md:order-1 space-y-8 md:space-y-10 text-text-dim leading-[1.8] text-base md:text-lg">
             <p>
               Não adianta ter um site que apenas "parece bonito". Minha obsessão é criar sites
               que carregam rápido e passam autoridade imediata para quem acessa.
@@ -513,7 +513,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="space-y-8 tech-card">
+          <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="order-1 md:order-2 space-y-8 tech-card">
             <div className="relative overflow-hidden tech-border p-2 group">
               {/* Gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-teal/10 via-transparent to-brand-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
@@ -558,11 +558,11 @@ const About = () => {
 
 const Projects = () => {
   return (
-    <section id="projetos" className="px-6 py-16 md:py-32 bg-white/[0.01] relative bg-grid">
+    <section id="projetos" className="px-6 py-12 md:py-32 bg-white/[0.01] relative bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">02 // deployment_records</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">Entregas de Alta Performance</h2>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">03 // deployment_records</span>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-8 md:mb-24 tracking-tighter">Entregas de Alta Performance</h2>
         </motion.div>
 
         <div className="grid gap-16">
@@ -682,11 +682,11 @@ const Skills = () => {
   );
 
   return (
-    <section id="skills" className="px-6 py-16 md:py-32 bg-grid">
+    <section id="skills" className="px-6 py-12 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // diferenciais_tecnicos</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">O que seu site terá</h2>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">02 // diferenciais_tecnicos</span>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-8 md:mb-24 tracking-tighter">O que seu site terá</h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -717,11 +717,11 @@ const Process = () => {
   ];
 
   return (
-    <section className="px-6 py-16 md:py-32 bg-grid relative">
+    <section className="px-6 py-12 md:py-32 bg-grid relative">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">04 // passo_a_passo</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">Como fazemos acontecer</h2>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-8 md:mb-24 tracking-tighter">Como fazemos acontecer</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1 bg-white/5 p-[1px] tech-border counter-list">
@@ -770,11 +770,11 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="px-6 py-24 md:py-32 bg-bg-dark relative">
+    <section className="px-6 py-12 md:py-32 bg-bg-dark relative">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">05 // perguntas_frequentes</span>
-          <h2 className="font-display text-4xl md:text-6xl font-black mb-8 md:mb-16 tracking-tighter">Tirando suas dúvidas</h2>
+          <h2 className="font-display text-4xl md:text-6xl font-black mb-6 md:mb-16 tracking-tighter">Tirando suas dúvidas</h2>
         </motion.div>
 
         <div className="space-y-3">
@@ -831,7 +831,7 @@ const FAQ = () => {
 
 const CTA = () => {
   return (
-    <section id="contato" className="px-6 py-16 md:py-32 bg-grid">
+    <section id="contato" className="px-6 py-12 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div
           {...fadeIn}
@@ -940,11 +940,11 @@ export default function App() {
       <Hero />
       <MarqueeTicker />
       <SectionDivider />
+      <About />
+      <SectionDivider />
       <Skills />
       <SectionDivider />
       <Projects />
-      <SectionDivider />
-      <About />
       <SectionDivider />
       <Process />
       <SectionDivider />
