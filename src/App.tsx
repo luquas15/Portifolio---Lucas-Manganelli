@@ -93,6 +93,75 @@ const BackToTop = () => {
   );
 };
 
+// ─── WHATSAPP FLOAT ──────────────────────────────────────────────────────────
+
+const WhatsAppFloat = () => (
+  <a
+    href="https://wa.me/5551995718366"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Falar pelo WhatsApp"
+    className="fixed bottom-5 left-5 md:bottom-8 md:left-8 z-50 flex items-center gap-3 group"
+  >
+    <div className="relative w-12 h-12 md:w-14 md:h-14 bg-[#25D366] flex items-center justify-center rounded-full shadow-[0_4px_24px_rgba(37,211,102,0.5)] active:scale-95 md:group-hover:scale-110 transition-transform duration-200">
+      <MessageCircle size={22} className="text-white" strokeWidth={2} />
+      <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20 pointer-events-none" />
+    </div>
+    <span className="hidden md:block glass px-3 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
+      Falar agora →
+    </span>
+  </a>
+);
+
+// ─── STAT COUNTER ─────────────────────────────────────────────────────────────
+
+const StatCounter = ({ num, suffix, label, delay = 0 }: {
+  num: number; suffix: string; label: string; delay?: number;
+}) => {
+  const [count, setCount] = React.useState(0);
+  const [started, setStarted] = React.useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    if (!started) return;
+    const timer = setTimeout(() => {
+      const duration = 1400;
+      let startTime: number | null = null;
+      const tick = (ts: number) => {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.round(eased * num));
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [started, num, delay]);
+
+  return (
+    <div ref={ref} className="flex flex-col group">
+      <span className="text-brand-teal font-display text-3xl md:text-5xl font-black mb-1 md:mb-2 tracking-tighter group-hover:translate-x-1 transition-transform duration-300 text-glow-teal">
+        {count}{suffix}
+      </span>
+      <span className="text-[7px] md:text-[9px] font-mono font-bold uppercase tracking-[0.15em] md:tracking-[0.3em] text-text-dim leading-tight">
+        {label}
+      </span>
+    </div>
+  );
+};
+
 // ─── LIVE SITE PREVIEW ───────────────────────────────────────────────────────
 
 const PREVIEW_W = 1280;
@@ -310,7 +379,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className="hidden sm:flex bg-brand-teal text-bg-dark btn-geometric text-[9px] md:text-[10px] tracking-widest uppercase hover:translate-x-1 active:scale-95 items-center gap-2"
           >
-            sys.connect() →
+            Falar comigo →
           </a>
           <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-brand-teal p-1">
             <Layers className={`transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`} size={24} />
@@ -339,7 +408,7 @@ const Navbar = () => {
             href="https://wa.me/5551995718366"
             className="bg-brand-teal text-bg-dark btn-geometric text-center py-4 font-black tracking-[0.2em] uppercase text-xs"
           >
-            sys.connect() →
+            Falar comigo →
           </a>
         </div>
       </motion.div>
@@ -366,7 +435,7 @@ const Hero = () => {
         >
           <div className="animate-pulse-teal" />
           <span className="text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-brand-teal">
-            // system.status: operational
+            disponível para novos projetos
           </span>
         </motion.div>
 
@@ -435,28 +504,16 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 md:gap-16 mt-10 md:mt-20 pt-8 md:pt-12 border-t border-white/5">
-          {[
-            { label: 'Projetos no Ar', value: '1+' },
-            { label: 'Clientes Satisfeitos', value: '100%' },
-            { label: 'Anos em TI', value: '3+' },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 + i * 0.1, duration: 0.6 }}
-              className="flex flex-col group"
-            >
-              <span className="text-brand-teal font-display text-3xl md:text-5xl font-black mb-1 md:mb-2 tracking-tighter group-hover:translate-x-1 transition-transform duration-300 text-glow-teal">
-                {stat.value}
-              </span>
-              <span className="text-[7px] md:text-[9px] font-mono font-bold uppercase tracking-[0.15em] md:tracking-[0.3em] text-text-dim leading-tight">
-                {stat.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="grid grid-cols-3 gap-4 md:gap-16 mt-10 md:mt-20 pt-8 md:pt-12 border-t border-white/5"
+        >
+          <StatCounter num={1}   suffix="+" label="Projetos no Ar"       delay={0}   />
+          <StatCounter num={100} suffix="%" label="Clientes Satisfeitos"  delay={150} />
+          <StatCounter num={3}   suffix="+" label="Anos em TI"            delay={300} />
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
@@ -484,7 +541,7 @@ const About = () => {
     <section id="sobre" className="px-6 py-12 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // sobre_mim</span>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // sobre mim</span>
           <h2 className="font-display text-4xl md:text-7xl font-black mb-6 md:mb-20 tracking-tighter">Um site para ser levado a sério</h2>
         </motion.div>
 
@@ -501,12 +558,12 @@ const About = () => {
             </p>
             <div className="pt-10 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-8 text-white uppercase text-[9px] font-mono font-bold tracking-[0.2em]">
               <div className="flex flex-col gap-3">
-                <span className="text-brand-teal opacity-50">// o_que_entrego</span>
+                <span className="text-brand-teal opacity-50">// o que entrego</span>
                 <span className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-teal" /> Profissionalismo</span>
                 <span className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-teal" /> Velocidade</span>
               </div>
               <div className="flex flex-col gap-3">
-                <span className="text-brand-teal opacity-50">// seus_resultados</span>
+                <span className="text-brand-teal opacity-50">// seus resultados</span>
                 <span className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-teal" /> Mais Confiança</span>
                 <span className="flex items-center gap-2"><div className="w-1 h-1 bg-brand-teal" /> Mais Contatos</span>
               </div>
@@ -525,7 +582,7 @@ const About = () => {
                 className="aspect-square w-full object-cover object-top filter grayscale contrast-110 hover:grayscale-0 transition-all duration-1000"
               />
               <div className="absolute top-4 right-4 text-[8px] font-mono bg-brand-teal text-bg-dark px-2 py-1 font-bold z-20">
-                id: lucas.mang
+                Lucas M.
               </div>
               {/* Available badge */}
               <div className="absolute bottom-4 left-4 flex items-center gap-2 glass border border-brand-teal/20 px-3 py-1.5 z-20">
@@ -535,8 +592,8 @@ const About = () => {
             </div>
             <div className="grid gap-3 font-mono">
               {[
-                { icon: Scale, title: 'Petry de Lima Adv.', status: '200 OK' },
-                { icon: Terminal, title: 'Fullstack Freelance', status: 'READY' },
+                { icon: Scale, title: 'Petry de Lima Adv.', status: 'Entregue' },
+                { icon: Terminal, title: 'Freelancer Full-stack', status: 'Ativo' },
               ].map((item, i) => (
                 <div key={i} className="glass p-5 rounded-[2px] flex items-center justify-between group hover:bg-brand-teal/[0.03] transition-colors border-l-2 border-transparent hover:border-brand-teal">
                   <div className="flex items-center gap-4">
@@ -561,7 +618,7 @@ const Projects = () => {
     <section id="projetos" className="px-6 py-12 md:py-32 bg-white/[0.01] relative bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">03 // deployment_records</span>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">03 // projetos entregues</span>
           <h2 className="font-display text-4xl md:text-7xl font-black mb-8 md:mb-24 tracking-tighter">Entregas de Alta Performance</h2>
         </motion.div>
 
@@ -601,7 +658,7 @@ const Projects = () => {
 
               <div className="flex flex-col justify-center">
                 <div className="flex flex-wrap gap-3 mb-10">
-                  {['Production', 'Legal_Tech', 'V8_Engine'].map((tag) => (
+                  {['No Ar', 'Advocacia', 'Alta Performance'].map((tag) => (
                     <span key={tag} className="text-[8px] font-mono font-bold uppercase tracking-[0.3em] border border-brand-teal/30 px-3 py-1.5 text-brand-teal bg-brand-teal/5">
                       {tag}
                     </span>
@@ -621,7 +678,7 @@ const Projects = () => {
                   rel="noopener noreferrer"
                   className="text-brand-teal font-black text-[10px] uppercase tracking-[0.4em] flex items-center gap-3 group w-fit"
                 >
-                  // ver_site_no_ar() <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
+                  Ver o site ao vivo <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform" />
                 </a>
               </div>
             </motion.div>
@@ -631,7 +688,7 @@ const Projects = () => {
             {...fadeIn}
             className="border border-dashed border-white/5 p-10 md:p-20 text-center flex flex-col items-center justify-center bg-white/[0.01] group hover:bg-brand-teal/[0.02] transition-colors"
           >
-            <span className="text-[10px] font-mono font-bold text-brand-teal/30 mb-6 uppercase tracking-[0.6em]">próxima_entrega</span>
+            <span className="text-[10px] font-mono font-bold text-brand-teal/30 mb-6 uppercase tracking-[0.6em]">próximo projeto</span>
             <h3 className="text-4xl font-display font-black mb-6 tracking-tighter uppercase opacity-40">Seu Site Aqui_</h3>
             <p className="text-text-dim mb-10 max-w-sm text-xs font-bold uppercase tracking-[0.2em] leading-loose">
               Status: Disponível para <br /> começar seu site hoje.
@@ -665,7 +722,7 @@ const Skills = () => {
         <div className="w-10 h-10 border border-brand-teal/25 flex items-center justify-center bg-brand-teal/5 group-hover:bg-brand-teal/10 transition-colors">
           <Icon size={16} className="text-brand-teal" />
         </div>
-        <span className="text-[7px] font-mono text-white/15 mt-1">{code}</span>
+        {code && <span className="text-[7px] font-mono text-white/15 mt-1">{code}</span>}
       </div>
 
       <h4 className="font-display font-black text-sm uppercase tracking-[0.3em] text-white mb-6">{title}</h4>
@@ -685,16 +742,16 @@ const Skills = () => {
     <section id="skills" className="px-6 py-12 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">02 // diferenciais_tecnicos</span>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">02 // o que você recebe</span>
           <h2 className="font-display text-4xl md:text-7xl font-black mb-8 md:mb-24 tracking-tighter">O que seu site terá</h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { title: 'Visual', code: 'FRONT_END', icon: Palette, num: '01', items: ['Design Moderno', 'Fácil de Usar', 'Elegante', 'Minimalista'] },
-            { title: 'Cérebros', code: 'BACK_END', icon: Cpu, num: '02', items: ['Rápido', 'Seguro', 'Sem Travamentos', 'Estável'] },
-            { title: 'Visibilidade', code: 'SEO_OPT', icon: Search, num: '03', items: ['Aparecer no Google', 'Carregamento Rápido', 'Mobile-First', 'Performance'] },
-            { title: 'Suporte', code: 'CARE_LINE', icon: LifeBuoy, num: '04', items: ['Hospedagem', 'E-mail Profissional', 'Atualizações', 'Consultoria'] },
+            { title: 'Design', code: '', icon: Palette, num: '01', items: ['Visual Moderno', 'Fácil de Usar', 'Elegante', 'Adaptado ao Celular'] },
+            { title: 'Desempenho', code: '', icon: Cpu, num: '02', items: ['Carrega Rápido', 'Seguro', 'Sem Travamentos', 'Estável'] },
+            { title: 'Visibilidade', code: '', icon: Search, num: '03', items: ['Aparece no Google', 'Mais Visitantes', 'Fácil de Encontrar', 'Resultados Reais'] },
+            { title: 'Suporte', code: '', icon: LifeBuoy, num: '04', items: ['Hospedagem', 'E-mail Profissional', 'Atualizações', 'Consultoria'] },
           ].map((group, i) => (
             <motion.div key={i} {...fadeIn} transition={{ delay: i * 0.1 }} className="h-full">
               <SkillGroup {...group} />
@@ -720,7 +777,7 @@ const Process = () => {
     <section className="px-6 py-12 md:py-32 bg-grid relative">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">04 // passo_a_passo</span>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">04 // como funciona</span>
           <h2 className="font-display text-4xl md:text-7xl font-black mb-8 md:mb-24 tracking-tighter">Como fazemos acontecer</h2>
         </motion.div>
 
@@ -773,7 +830,7 @@ const FAQ = () => {
     <section className="px-6 py-12 md:py-32 bg-bg-dark relative">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">05 // perguntas_frequentes</span>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">05 // dúvidas frequentes</span>
           <h2 className="font-display text-4xl md:text-6xl font-black mb-6 md:mb-16 tracking-tighter">Tirando suas dúvidas</h2>
         </motion.div>
 
@@ -857,7 +914,7 @@ const CTA = () => {
             />
           ))}
 
-          <span className="text-[9px] font-mono font-bold text-brand-teal uppercase tracking-[0.6em] mb-10 block">iniciando_conversa...</span>
+          <span className="text-[9px] font-mono font-bold text-brand-teal uppercase tracking-[0.6em] mb-10 block">vamos conversar?</span>
           <h2 className="font-display text-[2.5rem] md:text-5xl lg:text-[5rem] font-black mb-8 md:mb-12 tracking-tighter leading-[1.05]">
             Qual é o seu <br /><span className="text-brand-teal">próximo passo?</span>
           </h2>
@@ -898,11 +955,11 @@ const Footer = () => {
           <div className="font-display font-black text-4xl text-white tracking-tighter lowercase">
             lm<span className="text-brand-teal">.</span>
           </div>
-          <p className="opacity-40 uppercase tracking-widest">System verified by Lucas Manganelli</p>
+          <p className="opacity-40 uppercase tracking-widest">Desenvolvedor Web — Porto Alegre</p>
         </div>
 
         <div className="flex flex-col items-center md:items-start gap-4 w-full">
-          <span className="text-brand-teal opacity-50 mb-2">// social_nodes</span>
+          <span className="text-brand-teal opacity-50 mb-2">// redes sociais</span>
           <div className="flex flex-row md:flex-col justify-center gap-2 md:gap-4">
             {socialLinks.map(({ label, icon: Icon, href }) => (
               <a
@@ -920,8 +977,8 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col items-center md:items-end gap-2 w-full">
-          <span className="text-brand-teal opacity-50 mb-2">// environmental_data</span>
-          <span>© {new Date().getFullYear()} V1.0 Stable Build</span>
+          <span className="text-brand-teal opacity-50 mb-2">// localização</span>
+          <span>© {new Date().getFullYear()} Lucas Manganelli</span>
           <span>Porto Alegre, RS // Brazil</span>
         </div>
       </div>
@@ -952,6 +1009,7 @@ export default function App() {
       <SectionDivider />
       <CTA />
       <Footer />
+      <WhatsAppFloat />
       <BackToTop />
     </div>
   );
