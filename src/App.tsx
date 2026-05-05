@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { ArrowRight, Linkedin, MessageCircle, Mail, Globe, Layers, ArrowUp, Scale, Terminal } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, Linkedin, MessageCircle, Mail, Globe, Layers, ArrowUp, Scale, Terminal, Palette, Cpu, Search, LifeBuoy, ChevronDown } from 'lucide-react';
 
 const fadeIn = {
   initial: { opacity: 0, y: 24 },
@@ -48,14 +48,22 @@ const CursorGlow = () => {
 // ─── MARQUEE TICKER ───────────────────────────────────────────────────────────
 
 const MarqueeTicker = () => {
-  const stack = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Vite', 'Figma', 'Git', 'REST API'];
-  const items = [...stack, ...stack];
+  const stack1 = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Tailwind CSS', 'Vite', 'Figma', 'Git', 'REST API'];
+  const stack2 = ['UI/UX Design', 'SEO Avançado', 'Hospedagem', 'Performance', 'Mobile-First', 'Dark Mode', 'Acessibilidade', 'Animações', 'Deploy'];
   return (
-    <div className="relative overflow-hidden border-y border-white/5 py-5 bg-white/[0.01]">
+    <div className="relative overflow-hidden border-y border-white/5 py-4 bg-white/[0.01] space-y-3">
       <div className="flex animate-marquee">
-        {items.map((item, i) => (
-          <span key={i} className="flex items-center shrink-0 text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-white/25 mx-10">
+        {[...stack1, ...stack1].map((item, i) => (
+          <span key={i} className="flex items-center shrink-0 text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-white/40 mx-10">
             <span className="text-brand-teal mr-3">▸</span>
+            {item}
+          </span>
+        ))}
+      </div>
+      <div className="flex animate-marquee-reverse">
+        {[...stack2, ...stack2].map((item, i) => (
+          <span key={i} className="flex items-center shrink-0 text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-white/20 mx-10">
+            <span className="text-brand-orange mr-3">▸</span>
             {item}
           </span>
         ))}
@@ -78,7 +86,7 @@ const BackToTop = () => {
       initial={false}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12 }}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className={`fixed bottom-8 right-8 z-50 w-11 h-11 bg-brand-teal text-bg-dark flex items-center justify-center rounded-[2px] shadow-[0_0_20px_rgba(0,212,170,0.35)] hover:scale-110 active:scale-95 transition-transform font-black ${!visible ? 'pointer-events-none' : ''}`}
+      className={`fixed bottom-5 right-5 md:bottom-8 md:right-8 z-50 w-11 h-11 bg-brand-teal text-bg-dark flex items-center justify-center rounded-[2px] shadow-[0_0_20px_rgba(0,212,170,0.35)] active:scale-95 transition-transform font-black ${!visible ? 'pointer-events-none' : ''}`}
     >
       <ArrowUp size={16} />
     </motion.button>
@@ -343,11 +351,11 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center px-6 pt-24 md:pt-32 overflow-hidden bg-grid">
+    <section className="relative min-h-screen flex flex-col justify-center px-6 pt-24 pb-28 md:pt-32 md:pb-0 overflow-hidden bg-grid">
       <FloatingCode />
-      <div className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] radial-glow-teal -z-10 opacity-25 blur-3xl animate-pulse" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] radial-glow-orange -z-10 opacity-15 blur-3xl" />
-      <div className="absolute top-[35%] left-[25%] w-[400px] h-[400px] radial-glow-teal -z-10 opacity-08 blur-3xl" />
+      <div className="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] radial-glow-teal -z-10 opacity-30 blur-3xl animate-pulse" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] radial-glow-orange -z-10 opacity-20 blur-3xl" />
+      <div className="absolute top-[35%] left-[25%] w-[500px] h-[500px] radial-glow-teal -z-10 opacity-10 blur-3xl" />
 
       <div className="max-w-[1100px] mx-auto w-full">
         <motion.div
@@ -401,7 +409,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.6 }}
-            className="text-text-dim text-lg md:text-xl max-w-[550px] leading-relaxed border-l border-brand-teal/30 pl-8 font-medium"
+            className="text-text-dim text-base md:text-xl max-w-[550px] leading-relaxed border-l border-brand-teal/30 pl-5 md:pl-8 font-medium"
           >
             Olá, sou Lucas Manganelli. Crio sites modernos e rápidos que ajudam sua
             empresa a passar confiança, atrair mais clientes e vender mais na internet.
@@ -440,7 +448,7 @@ const Hero = () => {
               transition={{ delay: 0.5 + i * 0.1, duration: 0.6 }}
               className={`flex flex-col group ${i === 2 ? 'col-span-2 md:col-span-1' : ''}`}
             >
-              <span className="text-brand-teal font-display text-4xl md:text-5xl font-black mb-2 tracking-tighter group-hover:translate-x-2 transition-transform duration-300">
+              <span className="text-brand-teal font-display text-4xl md:text-5xl font-black mb-2 tracking-tighter group-hover:translate-x-2 transition-transform duration-300 text-glow-teal">
                 {stat.value}
               </span>
               <span className="text-[8px] md:text-[9px] font-mono font-bold uppercase tracking-[0.3em] text-text-dim">
@@ -450,6 +458,21 @@ const Hero = () => {
           ))}
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+      >
+        <span className="text-[7px] font-mono text-white/20 uppercase tracking-[0.4em]">scroll</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-10 bg-gradient-to-b from-brand-teal/50 to-transparent"
+        />
+      </motion.div>
     </section>
   );
 };
@@ -465,7 +488,7 @@ const About = () => {
           <h2 className="font-display text-4xl md:text-7xl font-black mb-10 md:mb-20 tracking-tighter">Um site para ser <br />levado a sério</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-[1fr_400px] gap-16 md:gap-24 items-start">
+        <div className="grid md:grid-cols-[1fr_400px] gap-10 md:gap-24 items-start">
           <motion.div {...fadeIn} transition={{ delay: 0.1 }} className="space-y-8 md:space-y-10 text-text-dim leading-[1.8] text-base md:text-lg">
             <p>
               Não adianta ter um site que apenas "parece bonito". Minha obsessão é criar sites
@@ -491,14 +514,23 @@ const About = () => {
           </motion.div>
 
           <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="space-y-8 tech-card">
-            <div className="relative overflow-hidden tech-border p-2">
+            <div className="relative overflow-hidden tech-border p-2 group">
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-teal/10 via-transparent to-brand-orange/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
+              {/* Animated corner glow */}
+              <div className="absolute top-0 left-0 w-24 h-24 bg-brand-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               <img
                 src="/lucas.jpg"
                 alt="Lucas Manganelli"
                 className="aspect-square w-full object-cover object-top filter grayscale contrast-110 hover:grayscale-0 transition-all duration-1000"
               />
-              <div className="absolute top-4 right-4 text-[8px] font-mono bg-brand-teal text-bg-dark px-2 py-1 font-bold">
+              <div className="absolute top-4 right-4 text-[8px] font-mono bg-brand-teal text-bg-dark px-2 py-1 font-bold z-20">
                 id: lucas.mang
+              </div>
+              {/* Available badge */}
+              <div className="absolute bottom-4 left-4 flex items-center gap-2 glass border border-brand-teal/20 px-3 py-1.5 z-20">
+                <div className="animate-pulse-teal" />
+                <span className="text-[8px] font-mono font-bold text-brand-teal uppercase tracking-[0.2em]">disponível</span>
               </div>
             </div>
             <div className="grid gap-3 font-mono">
@@ -606,7 +638,7 @@ const Projects = () => {
             </p>
             <a
               href="https://wa.me/5551995718366"
-              className="border border-brand-teal/40 text-brand-teal btn-geometric font-black text-[10px] uppercase tracking-[0.2em] px-12 py-5 hover:bg-brand-teal hover:text-bg-dark transition-all"
+              className="border border-brand-teal/40 text-brand-teal btn-geometric font-black text-[10px] uppercase tracking-[0.2em] w-full sm:w-auto px-10 py-5 hover:bg-brand-teal hover:text-bg-dark transition-all text-center"
             >
               Falar sobre projeto →
             </a>
@@ -620,16 +652,28 @@ const Projects = () => {
 // ─── SKILLS ───────────────────────────────────────────────────────────────────
 
 const Skills = () => {
-  const SkillGroup = ({ title, code, items }: { title: string; code: string; items: string[] }) => (
-    <div className="space-y-6 md:space-y-10 p-6 md:p-10 bg-glass tech-border relative group hover:bg-white/[0.02] transition-colors h-full">
-      <div className="flex justify-between items-start">
-        <h4 className="font-display font-black text-xs uppercase tracking-[0.4em] text-brand-teal">{title}</h4>
-        <span className="text-[7px] font-mono text-white/20">{code}</span>
+  const SkillGroup = ({ title, code, items, icon: Icon, num }: {
+    title: string; code: string; items: string[]; icon: React.ElementType; num: string;
+  }) => (
+    <div className="p-6 md:p-10 bg-glass tech-border relative group hover:bg-white/[0.03] transition-all h-full overflow-hidden">
+      {/* Big background number */}
+      <span className="absolute -right-3 -top-4 font-display font-black text-[6rem] leading-none text-white/[0.025] select-none pointer-events-none">{num}</span>
+      {/* Bottom slide-in accent */}
+      <div className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-brand-teal to-brand-orange/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+
+      <div className="flex items-start justify-between mb-8">
+        <div className="w-10 h-10 border border-brand-teal/25 flex items-center justify-center bg-brand-teal/5 group-hover:bg-brand-teal/10 transition-colors">
+          <Icon size={16} className="text-brand-teal" />
+        </div>
+        <span className="text-[7px] font-mono text-white/15 mt-1">{code}</span>
       </div>
-      <ul className="space-y-5">
+
+      <h4 className="font-display font-black text-sm uppercase tracking-[0.3em] text-white mb-6">{title}</h4>
+
+      <ul className="space-y-4">
         {items.map((item) => (
-          <li key={item} className="flex items-center gap-4 text-text-dim text-[10px] font-bold uppercase tracking-[0.2em]">
-            <div className="w-1.5 h-[1px] bg-brand-teal group-hover:w-4 transition-all duration-300" />
+          <li key={item} className="flex items-center gap-3 text-text-dim text-[10px] font-bold uppercase tracking-[0.2em]">
+            <div className="w-1.5 h-[1px] bg-brand-teal shrink-0 group-hover:w-5 transition-all duration-500" />
             {item}
           </li>
         ))}
@@ -641,18 +685,18 @@ const Skills = () => {
     <section id="skills" className="px-6 py-16 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
-          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">03 // diferenciais_tecnicos</span>
+          <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // diferenciais_tecnicos</span>
           <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">O que seu site terá</h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { title: 'Visual', code: 'FRONT_END', items: ['Design Moderno', 'Fácil de Usar', 'Elegante', 'Minimalista'] },
-            { title: 'Cérebros', code: 'BACK_END', items: ['Rápido', 'Seguro', 'Sem Travamentos', 'Estável'] },
-            { title: 'Visibilidade', code: 'SEO_OPT', items: ['Aparecer no Google', 'Carregamento Rápido', 'Mobile-First', 'Performance'] },
-            { title: 'Suporte', code: 'CARE_LINE', items: ['Hospedagem', 'E-mail Profissional', 'Atualizações', 'Consultoria'] },
+            { title: 'Visual', code: 'FRONT_END', icon: Palette, num: '01', items: ['Design Moderno', 'Fácil de Usar', 'Elegante', 'Minimalista'] },
+            { title: 'Cérebros', code: 'BACK_END', icon: Cpu, num: '02', items: ['Rápido', 'Seguro', 'Sem Travamentos', 'Estável'] },
+            { title: 'Visibilidade', code: 'SEO_OPT', icon: Search, num: '03', items: ['Aparecer no Google', 'Carregamento Rápido', 'Mobile-First', 'Performance'] },
+            { title: 'Suporte', code: 'CARE_LINE', icon: LifeBuoy, num: '04', items: ['Hospedagem', 'E-mail Profissional', 'Atualizações', 'Consultoria'] },
           ].map((group, i) => (
-            <motion.div key={i} {...fadeIn} transition={{ delay: i * 0.1 }}>
+            <motion.div key={i} {...fadeIn} transition={{ delay: i * 0.1 }} className="h-full">
               <SkillGroup {...group} />
             </motion.div>
           ))}
@@ -690,7 +734,7 @@ const Process = () => {
             >
               <div className="counter-item mb-6 block" />
               <h4 className="text-sm font-black mb-4 font-display uppercase tracking-widest">{step.title}</h4>
-              <p className="text-[10px] text-text-dim leading-relaxed font-bold uppercase tracking-widest opacity-60">{step.desc}</p>
+              <p className="text-sm text-text-dim leading-relaxed font-medium opacity-70">{step.desc}</p>
               <div className="absolute inset-0 bg-brand-teal/[0.03] opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute bottom-0 left-0 h-1 w-full bg-brand-teal scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </motion.div>
@@ -704,6 +748,8 @@ const Process = () => {
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
 const FAQ = () => {
+  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+
   const faqs = [
     {
       q: 'O site será meu para sempre?',
@@ -731,20 +777,50 @@ const FAQ = () => {
           <h2 className="font-display text-4xl md:text-6xl font-black mb-8 md:mb-16 tracking-tighter">Tirando suas dúvidas</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              {...fadeIn}
-              transition={{ delay: i * 0.1 }}
-              className="glass p-8 md:p-10 tech-border hover:bg-white/[0.02] transition-colors"
-            >
-              <h4 className="text-lg font-display font-black text-white mb-4 leading-tight tracking-tight uppercase">
-                <span className="text-brand-teal mr-2">/</span>{faq.q}
-              </h4>
-              <p className="text-text-dim text-sm leading-relaxed font-medium">{faq.a}</p>
-            </motion.div>
-          ))}
+        <div className="space-y-3">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                {...fadeIn}
+                transition={{ delay: i * 0.08 }}
+                className={`tech-border overflow-hidden transition-colors duration-300 ${isOpen ? 'bg-brand-teal/[0.03] border-brand-teal/20' : 'glass hover:bg-white/[0.02]'}`}
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="w-full px-8 md:px-10 py-6 md:py-7 flex items-center justify-between gap-6 text-left group"
+                >
+                  <h4 className={`text-base font-display font-black leading-tight tracking-tight uppercase transition-colors ${isOpen ? 'text-brand-teal' : 'text-white'}`}>
+                    <span className="text-brand-teal mr-2 opacity-60">/</span>{faq.q}
+                  </h4>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className="shrink-0"
+                  >
+                    <ChevronDown size={16} className={`transition-colors ${isOpen ? 'text-brand-teal' : 'text-white/30'}`} />
+                  </motion.div>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="body"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-8 md:px-10 pb-7 text-text-dim text-sm leading-relaxed font-medium border-t border-white/5 pt-5">
+                        {faq.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -759,27 +835,43 @@ const CTA = () => {
       <div className="max-w-[1100px] mx-auto">
         <motion.div
           {...fadeIn}
-          className="relative bg-glass border border-brand-teal/20 p-12 lg:p-32 overflow-hidden text-center"
+          className="relative bg-glass border border-brand-teal/20 p-8 md:p-12 lg:p-32 overflow-hidden text-center"
         >
           <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-teal to-transparent" />
           <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-teal/30 to-transparent" />
-          <div className="absolute top-[-50%] left-[50%] -translate-x-1/2 w-[600px] h-[600px] radial-glow-teal opacity-10 blur-3xl pointer-events-none" />
+          <div className="absolute top-[-50%] left-[50%] -translate-x-1/2 w-[700px] h-[700px] radial-glow-teal opacity-15 blur-3xl pointer-events-none" />
+          {/* Floating particles */}
+          {([0,1,2,3,4,5,6,7] as const).map((i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                width: i % 2 === 0 ? 3 : 2,
+                height: i % 2 === 0 ? 3 : 2,
+                background: i % 3 === 0 ? 'var(--color-brand-teal)' : 'var(--color-brand-orange)',
+                left: `${10 + i * 11}%`,
+                top: `${15 + (i % 4) * 20}%`,
+              }}
+              animate={{ y: [-8, 8, -8], opacity: [0.15, 0.5, 0.15] }}
+              transition={{ duration: 3 + i * 0.4, repeat: Infinity, delay: i * 0.35, ease: 'easeInOut' }}
+            />
+          ))}
 
           <span className="text-[9px] font-mono font-bold text-brand-teal uppercase tracking-[0.6em] mb-10 block">iniciando_conversa...</span>
-          <h2 className="font-display text-5xl md:text-[5rem] font-black mb-12 tracking-tighter leading-none">
+          <h2 className="font-display text-[2.5rem] md:text-5xl lg:text-[5rem] font-black mb-8 md:mb-12 tracking-tighter leading-[1.05]">
             Qual é o seu <br /><span className="text-brand-teal">próximo passo?</span>
           </h2>
-          <p className="text-text-dim mb-16 text-lg max-w-xl mx-auto font-medium leading-relaxed">
+          <p className="text-text-dim mb-10 md:mb-16 text-base md:text-lg max-w-xl mx-auto font-medium leading-relaxed">
             Se você busca um site que passe profissionalismo e traga clientes,
             estou pronto para te ajudar. Vamos conversar hoje?
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <a href="https://wa.me/5551995718366" className="bg-brand-teal text-bg-dark btn-geometric text-xs tracking-[0.2em] px-16 py-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="https://wa.me/5551995718366" className="bg-brand-teal text-bg-dark btn-geometric text-xs tracking-[0.2em] px-8 md:px-14 py-5 text-center">
               Falar pelo WhatsApp →
             </a>
             <a
               href="mailto:lucas.p.manganelli23@gmail.com"
-              className="border border-white/10 glass btn-geometric text-xs tracking-[0.2em] px-16 py-6 hover:bg-white/5"
+              className="border border-white/10 glass btn-geometric text-xs tracking-[0.2em] px-8 md:px-14 py-5 hover:bg-white/5 text-center"
             >
               Mandar um E-mail ↗
             </a>
@@ -800,8 +892,8 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="px-6 py-16 md:py-24 border-t border-white/5 bg-black/40">
-      <div className="max-w-[1100px] mx-auto flex flex-col md:grid md:grid-cols-3 gap-12 md:gap-16 items-start font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-text-dim text-center md:text-left">
+    <footer className="px-6 py-12 md:py-24 border-t border-white/5 bg-black/40">
+      <div className="max-w-[1100px] mx-auto flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-16 items-start font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-text-dim text-center md:text-left">
         <div className="flex flex-col items-center md:items-start gap-6 w-full">
           <div className="font-display font-black text-4xl text-white tracking-tighter lowercase">
             lm<span className="text-brand-teal">.</span>
@@ -811,17 +903,17 @@ const Footer = () => {
 
         <div className="flex flex-col items-center md:items-start gap-4 w-full">
           <span className="text-brand-teal opacity-50 mb-2">// social_nodes</span>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row md:flex-col justify-center gap-2 md:gap-4">
             {socialLinks.map(({ label, icon: Icon, href }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-brand-teal transition-colors flex items-center justify-center md:justify-start gap-3 group"
+                className="hover:text-brand-teal transition-colors flex items-center justify-center md:justify-start gap-2 group py-2 px-3 md:px-0 md:py-0 border border-white/5 md:border-none rounded-sm md:rounded-none"
               >
-                <Icon size={11} className="text-brand-teal/40 group-hover:text-brand-teal transition-colors" />
-                {label}
+                <Icon size={13} className="text-brand-teal/50 group-hover:text-brand-teal transition-colors" />
+                <span className="hidden md:inline">{label}</span>
               </a>
             ))}
           </div>
@@ -848,11 +940,11 @@ export default function App() {
       <Hero />
       <MarqueeTicker />
       <SectionDivider />
-      <About />
+      <Skills />
       <SectionDivider />
       <Projects />
       <SectionDivider />
-      <Skills />
+      <About />
       <SectionDivider />
       <Process />
       <SectionDivider />
