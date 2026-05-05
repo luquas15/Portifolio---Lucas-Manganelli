@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Linkedin, MessageCircle, Mail, Globe, Layers, ArrowUp, Scale, Terminal } from 'lucide-react';
@@ -348,7 +343,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center px-6 pt-32 overflow-hidden bg-grid">
+    <section className="relative min-h-screen flex flex-col justify-center px-6 pt-24 md:pt-32 overflow-hidden bg-grid">
       <FloatingCode />
       <div className="absolute top-[-10%] right-[-5%] w-[700px] h-[700px] radial-glow-teal -z-10 opacity-25 blur-3xl animate-pulse" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] radial-glow-orange -z-10 opacity-15 blur-3xl" />
@@ -389,7 +384,7 @@ const Hero = () => {
             <span className="text-brand-teal text-glow-teal">merece</span> um
           </motion.div>
         </div>
-        <div className="overflow-hidden mb-12">
+        <div className="overflow-hidden mb-8 md:mb-12">
           <motion.div
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -432,7 +427,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 mt-20 md:mt-24 pt-12 border-t border-white/5">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16 mt-12 md:mt-20 pt-8 md:pt-12 border-t border-white/5">
           {[
             { label: 'Projetos no Ar', value: '1+' },
             { label: 'Clientes Satisfeitos', value: '100%' },
@@ -463,11 +458,11 @@ const Hero = () => {
 
 const About = () => {
   return (
-    <section id="sobre" className="px-6 py-32 bg-grid">
+    <section id="sobre" className="px-6 py-16 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">01 // foco_em_resultados</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-20 tracking-tighter">Um site para ser <br />levado a sério</h2>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-10 md:mb-20 tracking-tighter">Um site para ser <br />levado a sério</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-[1fr_400px] gap-16 md:gap-24 items-start">
@@ -531,11 +526,11 @@ const About = () => {
 
 const Projects = () => {
   return (
-    <section id="projetos" className="px-6 py-32 bg-white/[0.01] relative bg-grid">
+    <section id="projetos" className="px-6 py-16 md:py-32 bg-white/[0.01] relative bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">02 // deployment_records</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-24 tracking-tighter">Entregas de Alta Performance</h2>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">Entregas de Alta Performance</h2>
         </motion.div>
 
         <div className="grid gap-16">
@@ -602,7 +597,7 @@ const Projects = () => {
 
           <motion.div
             {...fadeIn}
-            className="border border-dashed border-white/5 p-20 text-center flex flex-col items-center justify-center bg-white/[0.01] group hover:bg-brand-teal/[0.02] transition-colors"
+            className="border border-dashed border-white/5 p-10 md:p-20 text-center flex flex-col items-center justify-center bg-white/[0.01] group hover:bg-brand-teal/[0.02] transition-colors"
           >
             <span className="text-[10px] font-mono font-bold text-brand-teal/30 mb-6 uppercase tracking-[0.6em]">próxima_entrega</span>
             <h3 className="text-4xl font-display font-black mb-6 tracking-tighter uppercase opacity-40">Seu Site Aqui_</h3>
@@ -626,7 +621,7 @@ const Projects = () => {
 
 const Skills = () => {
   const SkillGroup = ({ title, code, items }: { title: string; code: string; items: string[] }) => (
-    <div className="space-y-10 p-10 bg-glass tech-border relative group hover:bg-white/[0.02] transition-colors h-full">
+    <div className="space-y-6 md:space-y-10 p-6 md:p-10 bg-glass tech-border relative group hover:bg-white/[0.02] transition-colors h-full">
       <div className="flex justify-between items-start">
         <h4 className="font-display font-black text-xs uppercase tracking-[0.4em] text-brand-teal">{title}</h4>
         <span className="text-[7px] font-mono text-white/20">{code}</span>
@@ -643,11 +638,11 @@ const Skills = () => {
   );
 
   return (
-    <section id="skills" className="px-6 py-32 bg-grid">
+    <section id="skills" className="px-6 py-16 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">03 // diferenciais_tecnicos</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-24 tracking-tighter">O que seu site terá</h2>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">O que seu site terá</h2>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -678,11 +673,11 @@ const Process = () => {
   ];
 
   return (
-    <section className="px-6 py-32 bg-grid relative">
+    <section className="px-6 py-16 md:py-32 bg-grid relative">
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">04 // passo_a_passo</span>
-          <h2 className="font-display text-4xl md:text-7xl font-black mb-24 tracking-tighter">Como fazemos acontecer</h2>
+          <h2 className="font-display text-4xl md:text-7xl font-black mb-12 md:mb-24 tracking-tighter">Como fazemos acontecer</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-1 bg-white/5 p-[1px] tech-border counter-list">
@@ -691,7 +686,7 @@ const Process = () => {
               key={i}
               {...fadeIn}
               transition={{ delay: i * 0.1 }}
-              className="bg-bg-dark p-12 group relative overflow-hidden"
+              className="bg-bg-dark p-8 md:p-12 group relative overflow-hidden"
             >
               <div className="counter-item mb-6 block" />
               <h4 className="text-sm font-black mb-4 font-display uppercase tracking-widest">{step.title}</h4>
@@ -733,7 +728,7 @@ const FAQ = () => {
       <div className="max-w-[1100px] mx-auto">
         <motion.div {...fadeIn}>
           <span className="text-brand-teal text-[9px] font-mono font-bold uppercase tracking-[0.4em] mb-4 block">05 // perguntas_frequentes</span>
-          <h2 className="font-display text-4xl md:text-6xl font-black mb-16 tracking-tighter">Tirando suas dúvidas</h2>
+          <h2 className="font-display text-4xl md:text-6xl font-black mb-8 md:mb-16 tracking-tighter">Tirando suas dúvidas</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -760,7 +755,7 @@ const FAQ = () => {
 
 const CTA = () => {
   return (
-    <section id="contato" className="px-6 py-32 bg-grid">
+    <section id="contato" className="px-6 py-16 md:py-32 bg-grid">
       <div className="max-w-[1100px] mx-auto">
         <motion.div
           {...fadeIn}
