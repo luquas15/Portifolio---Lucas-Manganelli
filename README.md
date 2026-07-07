@@ -1,20 +1,29 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Lucas Manganelli — Portfólio
 
-# Run and deploy your AI Studio app
+Site pessoal de Lucas Manganelli, desenvolvedor full-stack freelancer. Landing page única (React + Vite + Tailwind CSS + Motion) apresentando serviços, stack, processo de trabalho e projetos entregues — incluindo o site institucional da [Petry de Lima Advocacia](https://petrydelimaadvocacia.com.br).
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/19156557-eaaf-4c82-b342-1a047776ab66
+- [React 19](https://react.dev) + [TypeScript](https://www.typescriptlang.org)
+- [Vite](https://vite.dev)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Motion](https://motion.dev) (animações)
+- [Lucide React](https://lucide.dev) (ícones)
 
-## Run Locally
+## Rodando localmente
 
-**Prerequisites:**  Node.js
+**Pré-requisitos:** Node.js 18+
 
+```bash
+npm install
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Build de produção
+
+```bash
+npm run build
+npm run preview   # pré-visualiza o build local
+```
+
+Deploy é feito no [Vercel](https://vercel.com).
